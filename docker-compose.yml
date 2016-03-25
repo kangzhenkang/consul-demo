@@ -6,6 +6,14 @@ helloworld:
     SERVICE_NAME: helloworld
     SERVICE_TAGS: production
 
+alantest:
+  build: ./helloworld
+  ports:
+    - "4000"
+  environment:
+    SERVICE_NAME: alantest
+    SERVICE_TAGS: production
+
 consul:
   command: -server -bootstrap
   image: progrium/consul:latest
@@ -13,7 +21,7 @@ consul:
     - "8400:8400"
     - "8500:8500"
     - "8600:53/udp"
-    - "172.17.42.1:53:53/udp"
+    - "192.168.164.180:53:53/udp"
 
 registrator:
   command:  -ip=192.168.99.100 consul://consul:8500
